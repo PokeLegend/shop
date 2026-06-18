@@ -1,0 +1,1538 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Patreon+ · Portal · Bio · Offers · Forums</title>
+    <style>
+        /* ===== RESET & THEME ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+            min-height: 100vh;
+            padding: 20px;
+            background: linear-gradient(-45deg, #1a0a1a, #2d0a2d, #1a0a2e, #0d0a1a);
+            background-size: 400% 400%;
+            animation: gradientShift 12s ease-in-out infinite;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            25% { background-position: 100% 0%; }
+            50% { background-position: 100% 50%; }
+            75% { background-position: 0% 100%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* ===== SPARKLE CANVAS ===== */
+        #sparkleCanvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* ===== FLOATING HEARTS ===== */
+        .floating-heart {
+            position: fixed;
+            font-size: 24px;
+            pointer-events: none;
+            z-index: 0;
+            animation: floatHeart linear infinite;
+            opacity: 0.6;
+        }
+
+        @keyframes floatHeart {
+            0% {
+                transform: translateY(100vh) scale(0.5) rotate(0deg);
+                opacity: 0.2;
+            }
+            10% { opacity: 0.8; }
+            90% { opacity: 0.8; }
+            100% {
+                transform: translateY(-10vh) scale(1.2) rotate(720deg);
+                opacity: 0;
+            }
+        }
+
+        /* ===== CONTAINER ===== */
+        .container {
+            max-width: 520px;
+            width: 100%;
+            background: rgba(10, 5, 20, 0.8);
+            backdrop-filter: blur(24px) saturate(1.6);
+            -webkit-backdrop-filter: blur(24px) saturate(1.6);
+            border-radius: 40px;
+            padding: 32px 20px;
+            border: 2px solid transparent;
+            background-clip: padding-box;
+            box-shadow: 
+                0 30px 60px rgba(0, 0, 0, 0.7),
+                0 0 0 1px rgba(255, 0, 102, 0.2) inset,
+                0 0 60px rgba(255, 0, 102, 0.1),
+                0 0 120px rgba(255, 0, 102, 0.05);
+            margin-top: 20px;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+            animation: floatContainer 6s ease-in-out infinite;
+            transition: box-shadow 0.5s ease;
+        }
+
+        .container::before {
+            content: '';
+            position: absolute;
+            inset: -2px;
+            z-index: -1;
+            border-radius: 42px;
+            background: linear-gradient(135deg, #ff0066, #00e5ff, #ffcc00, #ff0066);
+            background-size: 300% 300%;
+            animation: shimmerBorder 4s ease-in-out infinite;
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            padding: 2px;
+        }
+
+        @keyframes shimmerBorder {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .container:hover {
+            box-shadow: 
+                0 40px 80px rgba(0, 0, 0, 0.8),
+                0 0 0 1px rgba(255, 0, 102, 0.4) inset,
+                0 0 80px rgba(255, 0, 102, 0.2),
+                0 0 160px rgba(255, 0, 102, 0.1);
+        }
+
+        @keyframes floatContainer {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-6px); }
+        }
+
+        /* ===== HEADER ===== */
+        .header {
+            text-align: center;
+            margin-bottom: 28px;
+        }
+
+        .avatar {
+            width: 88px;
+            height: 88px;
+            border-radius: 50%;
+            margin: 0 auto 14px;
+            background: linear-gradient(135deg, #ff0066, #ffcc00, #00e5ff);
+            background-size: 200% 200%;
+            animation: avatarGradient 3s ease-in-out infinite;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 44px;
+            font-weight: 700;
+            color: #fff;
+            user-select: none;
+            box-shadow: 0 0 40px rgba(255, 0, 102, 0.5), 0 0 80px rgba(255, 0, 102, 0.2);
+            animation: avatarGradient 3s ease-in-out infinite, floatAvatar 5s ease-in-out infinite;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+        }
+
+        @keyframes avatarGradient {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        @keyframes floatAvatar {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-10px) rotate(3deg); }
+        }
+
+        .header h1 {
+            font-size: 30px;
+            font-weight: 800;
+            background: linear-gradient(135deg, #ffcc00, #ff0066, #00e5ff, #ffcc00);
+            background-size: 300% 300%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: shimmerText 3s ease-in-out infinite;
+            letter-spacing: -0.5px;
+            filter: drop-shadow(0 2px 20px rgba(255, 0, 102, 0.2));
+        }
+
+        @keyframes shimmerText {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        .header p {
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 14px;
+            margin-top: 4px;
+            letter-spacing: 1px;
+            text-shadow: 0 0 20px rgba(255, 0, 102, 0.1);
+        }
+
+        .badge {
+            display: inline-block;
+            margin-top: 8px;
+            padding: 4px 20px;
+            background: rgba(255, 0, 102, 0.2);
+            border: 1.5px solid rgba(255, 204, 0, 0.3);
+            border-radius: 30px;
+            font-size: 11px;
+            color: #ffcc00;
+            letter-spacing: 0.8px;
+            backdrop-filter: blur(4px);
+            box-shadow: 0 0 20px rgba(255, 0, 102, 0.1);
+            font-weight: 600;
+        }
+
+        /* ===== TABS ===== */
+        .tab-nav {
+            display: flex;
+            gap: 4px;
+            margin-bottom: 28px;
+            padding-bottom: 4px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .tab-btn {
+            background: transparent;
+            border: none;
+            color: rgba(255, 255, 255, 0.4);
+            padding: 8px 14px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            border-radius: 40px;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            letter-spacing: 0.3px;
+            flex: 1;
+            text-align: center;
+            min-width: 70px;
+            position: relative;
+        }
+
+        .tab-btn::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #ff0066, #ffcc00, #00e5ff);
+            background-size: 200% 100%;
+            transition: all 0.4s ease;
+            border-radius: 3px;
+            box-shadow: 0 0 20px rgba(255, 0, 102, 0.4);
+        }
+
+        .tab-btn:hover {
+            color: rgba(255, 255, 255, 0.8);
+            background: rgba(255, 255, 255, 0.05);
+            transform: translateY(-2px);
+        }
+
+        .tab-btn.active {
+            color: #00e5ff;
+            background: rgba(0, 229, 255, 0.1);
+            box-shadow: 0 0 30px rgba(0, 229, 255, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .tab-btn.active::after {
+            width: 70%;
+            animation: shimmerUnderline 2s ease-in-out infinite;
+        }
+
+        @keyframes shimmerUnderline {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        .tab-content {
+            display: none;
+            animation: fadeSlide 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            text-align: left;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        @keyframes fadeSlide {
+            from { opacity: 0; transform: translateY(16px) scale(0.98); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
+        /* ============================================================ */
+        /* TAB 1: PORTAL (unchanged) */
+        /* ============================================================ */
+        .portal-container {
+            text-align: center;
+        }
+
+        .portal-container h3 {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 6px;
+            text-align: center;
+            background: linear-gradient(135deg, #ffcc00, #ff0066, #00e5ff);
+            background-size: 200% 200%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: shimmerText 3s ease-in-out infinite;
+        }
+
+        .portal-container .sub {
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 14px;
+            margin-bottom: 24px;
+            text-align: center;
+            letter-spacing: 0.3px;
+        }
+
+        .join-top-btn {
+            width: 100%;
+            padding: 18px;
+            background: linear-gradient(135deg, #ff0066, #ffcc00, #00e5ff);
+            background-size: 200% 200%;
+            border: none;
+            border-radius: 30px;
+            color: #fff;
+            font-weight: 800;
+            font-size: 22px;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 8px 40px rgba(255, 0, 102, 0.4), 0 0 80px rgba(255, 0, 102, 0.15);
+            margin-bottom: 20px;
+            text-align: center;
+            max-width: 400px;
+            margin-left: auto;
+            margin-right: auto;
+            position: relative;
+            overflow: hidden;
+            animation: shimmerBtn 3s ease-in-out infinite;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .join-top-btn::before {
+            content: '🚀';
+            position: absolute;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 22px;
+            animation: sparkle 1.5s ease-in-out infinite;
+        }
+
+        .join-top-btn::after {
+            content: '✨';
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 22px;
+            animation: sparkle 1.5s ease-in-out infinite 0.5s;
+        }
+
+        @keyframes shimmerBtn {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        @keyframes sparkle {
+            0%, 100% { opacity: 1; transform: translateY(-50%) scale(1); }
+            50% { opacity: 0.3; transform: translateY(-50%) scale(0.8); }
+        }
+
+        .join-top-btn:hover {
+            transform: scale(1.04);
+            box-shadow: 0 8px 60px rgba(255, 0, 102, 0.6), 0 0 120px rgba(255, 0, 102, 0.25);
+        }
+
+        .order-summary {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 24px;
+            padding: 20px 18px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            margin-bottom: 28px;
+            text-align: center;
+            backdrop-filter: blur(4px);
+            transition: all 0.4s ease;
+        }
+
+        .order-summary:hover {
+            border-color: rgba(0, 229, 255, 0.4);
+            box-shadow: 0 4px 30px rgba(0, 229, 255, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .order-summary .row {
+            display: flex;
+            justify-content: space-between;
+            padding: 6px 0;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 14px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            max-width: 300px;
+            margin: 0 auto;
+        }
+
+        .order-summary .row:last-child {
+            border-bottom: none;
+        }
+
+        .order-summary .row .label {
+            color: rgba(255, 255, 255, 0.5);
+        }
+        .order-summary .row .value {
+            color: #fff;
+            font-weight: 600;
+        }
+        .order-summary .row.total {
+            margin-top: 6px;
+            font-size: 16px;
+        }
+        .order-summary .row.total .value {
+            background: linear-gradient(135deg, #ffcc00, #ff0066);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-size: 22px;
+            font-weight: 800;
+        }
+
+        .processors-section {
+            margin-bottom: 28px;
+            text-align: center;
+        }
+
+        .processors-section .section-label {
+            color: rgba(255, 255, 255, 0.3);
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            margin: 18px 0 10px 0;
+            display: block;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            padding-top: 16px;
+        }
+
+        .processors-section .section-label:first-of-type {
+            border-top: none;
+            padding-top: 0;
+            margin-top: 0;
+        }
+
+        .processor-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            justify-content: center;
+        }
+
+        .processor-chip {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1.5px solid rgba(255, 255, 255, 0.1);
+            border-radius: 30px;
+            padding: 6px 14px;
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.7);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+            white-space: nowrap;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            text-decoration: none;
+            backdrop-filter: blur(4px);
+        }
+
+        .processor-chip:hover {
+            background: rgba(255, 255, 255, 0.15);
+            border-color: rgba(255, 204, 0, 0.5);
+            color: #fff;
+            transform: scale(1.06) translateY(-3px);
+            box-shadow: 0 8px 30px rgba(255, 204, 0, 0.15);
+        }
+
+        .processor-chip .emoji {
+            font-size: 14px;
+        }
+
+        .processor-chip:nth-child(1) { border-color: #00e5ff; }
+        .processor-chip:nth-child(2) { border-color: #ffcc00; }
+        .processor-chip:nth-child(3) { border-color: #00e676; }
+        .processor-chip:nth-child(4) { border-color: #ff9100; }
+        .processor-chip:nth-child(5) { border-color: #00e5ff; }
+        .processor-chip:nth-child(6) { border-color: #ff0066; }
+
+        .processor-chip.highlight {
+            border-color: #ff0066;
+            background: rgba(255, 0, 102, 0.2);
+            box-shadow: 0 0 30px rgba(255, 0, 102, 0.2);
+            color: #fff;
+            font-size: 20px;
+            padding: 14px 28px;
+            border-radius: 50px;
+            gap: 10px;
+            font-weight: 700;
+            animation: highlightPulse 2.2s ease-in-out infinite;
+            border-width: 2.5px;
+            letter-spacing: 0.5px;
+        }
+
+        .processor-chip.highlight .emoji {
+            font-size: 26px;
+        }
+
+        @keyframes highlightPulse {
+            0%, 100% {
+                box-shadow: 0 0 30px rgba(255, 0, 102, 0.2);
+                transform: scale(1);
+                border-color: #ff0066;
+            }
+            50% {
+                box-shadow: 0 0 60px rgba(255, 0, 102, 0.4), 0 0 120px rgba(255, 0, 102, 0.15);
+                transform: scale(1.04);
+                border-color: #ffcc00;
+            }
+        }
+
+        .processor-chip.highlight:hover {
+            transform: scale(1.1);
+            background: rgba(255, 0, 102, 0.35);
+            box-shadow: 0 0 70px rgba(255, 0, 102, 0.5);
+        }
+
+        .pay-simple-btn {
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(135deg, #ff0066, #ffcc00, #00e5ff);
+            background-size: 200% 200%;
+            border: none;
+            border-radius: 30px;
+            color: #fff;
+            font-weight: 700;
+            font-size: 18px;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 8px 30px rgba(255, 0, 102, 0.3);
+            margin-top: 10px;
+            text-align: center;
+            max-width: 400px;
+            margin-left: auto;
+            margin-right: auto;
+            position: relative;
+            overflow: hidden;
+            animation: shimmerBtn 3s ease-in-out infinite;
+        }
+
+        .pay-simple-btn::before {
+            content: '⚡';
+            position: absolute;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 18px;
+            animation: sparkle 1.5s ease-in-out infinite;
+        }
+
+        .pay-simple-btn::after {
+            content: '✨';
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 18px;
+            animation: sparkle 1.5s ease-in-out infinite 0.5s;
+        }
+
+        .pay-simple-btn:hover {
+            transform: scale(1.03);
+            box-shadow: 0 8px 50px rgba(255, 0, 102, 0.5);
+        }
+
+        .secure-badge {
+            text-align: center;
+            margin-top: 14px;
+            color: rgba(255, 255, 255, 0.2);
+            font-size: 12px;
+            letter-spacing: 0.5px;
+        }
+
+        .video-wrapper {
+            margin-top: 28px;
+            border-radius: 20px;
+            overflow: hidden;
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 0 30px rgba(255, 0, 102, 0.15);
+            transition: all 0.4s ease;
+        }
+
+        .video-wrapper:hover {
+            border-color: rgba(0, 229, 255, 0.4);
+            box-shadow: 0 0 50px rgba(255, 0, 102, 0.25);
+            transform: scale(1.01);
+        }
+
+        .video-wrapper iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        /* ============================================================ */
+        /* TAB 2: BIO (unchanged) */
+        /* ============================================================ */
+        .bio-header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .bio-header .bio-avatar {
+            width: 72px;
+            height: 72px;
+            border-radius: 50%;
+            margin: 0 auto 10px;
+            background: linear-gradient(135deg, #ff0066, #ffcc00, #00e5ff);
+            background-size: 200% 200%;
+            animation: avatarGradient 3s ease-in-out infinite;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            font-weight: 700;
+            color: #fff;
+            box-shadow: 0 0 40px rgba(255, 0, 102, 0.4);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .bio-header h2 {
+            font-size: 22px;
+            font-weight: 700;
+            background: linear-gradient(135deg, #ffcc00, #ff0066, #00e5ff);
+            background-size: 200% 200%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: shimmerText 3s ease-in-out infinite;
+            letter-spacing: -0.2px;
+        }
+
+        .bio-header .bio-tagline {
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 13px;
+            margin-top: 2px;
+            letter-spacing: 0.6px;
+        }
+
+        .link-list {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            margin-bottom: 20px;
+        }
+
+        .link-btn {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 16px 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1.5px solid rgba(255, 255, 255, 0.08);
+            border-radius: 18px;
+            color: #fff;
+            text-decoration: none;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+            font-weight: 500;
+            font-size: 15px;
+            gap: 12px;
+            text-align: left;
+            backdrop-filter: blur(4px);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .link-btn::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 18px;
+            padding: 2.5px;
+            background: linear-gradient(135deg, #ff0066, #ffcc00, #00e5ff, #ff0066);
+            background-size: 300% 300%;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            pointer-events: none;
+        }
+
+        .link-btn:hover::before {
+            opacity: 1;
+            animation: gradientBorder 3s ease infinite;
+        }
+
+        @keyframes gradientBorder {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .link-btn:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: scale(1.03) translateY(-3px);
+            box-shadow: 0 12px 40px rgba(255, 0, 102, 0.15);
+            border-color: transparent;
+        }
+
+        .link-btn .left {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .link-btn .icon {
+            font-size: 22px;
+            width: 36px;
+            text-align: center;
+        }
+
+        .link-btn .label {
+            flex: 1;
+            position: relative;
+            z-index: 1;
+        }
+
+        .link-btn .right-arrow {
+            color: rgba(255, 255, 255, 0.3);
+            font-size: 14px;
+            transition: all 0.4s ease;
+            position: relative;
+            z-index: 1;
+        }
+
+        .link-btn:hover .right-arrow {
+            color: rgba(255, 255, 255, 0.7);
+            transform: translateX(8px);
+        }
+
+        .link-btn.highlight {
+            background: rgba(255, 0, 102, 0.15);
+            border-color: rgba(255, 0, 102, 0.3);
+            font-weight: 600;
+        }
+
+        .link-btn.highlight:hover {
+            background: rgba(255, 0, 102, 0.25);
+            border-color: transparent;
+            box-shadow: 0 12px 40px rgba(255, 0, 102, 0.2);
+        }
+
+        .link-btn .tag {
+            font-size: 10px;
+            background: rgba(0, 229, 255, 0.15);
+            color: #00e5ff;
+            padding: 2px 10px;
+            border-radius: 30px;
+            font-weight: 600;
+            letter-spacing: 0.3px;
+            margin-left: 6px;
+            position: relative;
+            z-index: 1;
+            border: 1px solid rgba(0, 229, 255, 0.2);
+        }
+
+        .link-btn .tag.pro {
+            background: rgba(255, 204, 0, 0.15);
+            color: #ffcc00;
+            border-color: rgba(255, 204, 0, 0.2);
+        }
+
+        .bio-footer {
+            text-align: center;
+            margin-top: 16px;
+            font-size: 11px;
+            color: rgba(255, 255, 255, 0.15);
+            letter-spacing: 0.3px;
+        }
+
+        /* ============================================================ */
+        /* TAB 3: OFFERS – Strategic Framework List */
+        /* ============================================================ */
+        .offers-container {
+            text-align: left;
+        }
+
+        .offers-container h3 {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 6px;
+            text-align: center;
+            background: linear-gradient(135deg, #ffcc00, #ff0066, #00e5ff);
+            background-size: 200% 200%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: shimmerText 3s ease-in-out infinite;
+        }
+
+        .offers-container .sub {
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 14px;
+            margin-bottom: 24px;
+            text-align: center;
+            letter-spacing: 0.3px;
+        }
+
+        .offer-tier {
+            background: rgba(255, 255, 255, 0.04);
+            border-radius: 24px;
+            padding: 20px 18px;
+            margin-bottom: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            transition: all 0.4s ease;
+        }
+
+        .offer-tier:hover {
+            border-color: rgba(0, 229, 255, 0.3);
+            box-shadow: 0 4px 30px rgba(0, 229, 255, 0.05);
+            transform: translateY(-2px);
+        }
+
+        .offer-tier .tier-badge {
+            display: inline-block;
+            padding: 4px 16px;
+            border-radius: 30px;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.8px;
+            text-transform: uppercase;
+            margin-bottom: 12px;
+        }
+
+        .offer-tier .tier-badge.tier1 {
+            background: rgba(0, 229, 255, 0.2);
+            color: #00e5ff;
+            border: 1px solid rgba(0, 229, 255, 0.3);
+        }
+
+        .offer-tier .tier-badge.tier2 {
+            background: rgba(255, 204, 0, 0.2);
+            color: #ffcc00;
+            border: 1px solid rgba(255, 204, 0, 0.3);
+        }
+
+        .offer-tier .tier-badge.tier3 {
+            background: rgba(255, 0, 102, 0.2);
+            color: #ff0066;
+            border: 1px solid rgba(255, 0, 102, 0.3);
+        }
+
+        .offer-tier h4 {
+            font-size: 20px;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 8px;
+        }
+
+        .offer-tier .tier-sub {
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 14px;
+            margin-bottom: 12px;
+            font-style: italic;
+        }
+
+        .offer-tier .tier-desc {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 14px;
+            line-height: 1.6;
+            margin-bottom: 12px;
+        }
+
+        .offer-tier .tier-codes {
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 12px;
+            padding: 12px 16px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .offer-tier .tier-codes .code-label {
+            color: rgba(255, 255, 255, 0.3);
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 0.8px;
+            text-transform: uppercase;
+            margin-bottom: 4px;
+        }
+
+        .offer-tier .tier-codes .code-item {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 13px;
+            padding: 3px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+        }
+
+        .offer-tier .tier-codes .code-item:last-child {
+            border-bottom: none;
+        }
+
+        .offer-tier .tier-codes .code-item strong {
+            color: #fff;
+            font-weight: 600;
+        }
+
+        /* ============================================================ */
+        /* TAB 4: FORUMS (formerly Offers) – Google Form */
+        /* ============================================================ */
+        .section-title {
+            color: #fff;
+            font-size: 20px;
+            font-weight: 600;
+            margin: 0 0 18px 0;
+            padding-bottom: 10px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .section-title .lock {
+            font-size: 13px;
+            color: #ffcc00;
+            background: rgba(255, 204, 0, 0.1);
+            padding: 2px 12px;
+            border-radius: 20px;
+            font-weight: 500;
+            box-shadow: 0 0 20px rgba(255, 204, 0, 0.05);
+            border: 1px solid rgba(255, 204, 0, 0.15);
+        }
+
+        .form-wrapper {
+            width: 100%;
+            margin: 0 auto;
+            border-radius: 24px;
+            overflow: hidden;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1.5px solid rgba(255, 255, 255, 0.08);
+            transition: all 0.5s ease;
+            backdrop-filter: blur(4px);
+        }
+
+        .form-wrapper:hover {
+            border-color: rgba(0, 229, 255, 0.3);
+            box-shadow: 0 8px 40px rgba(0, 229, 255, 0.05);
+            transform: translateY(-2px);
+        }
+
+        .form-wrapper iframe {
+            width: 100%;
+            height: 800px;
+            border: none;
+            display: block;
+            background: transparent;
+        }
+
+        .join-list-text {
+            text-align: center;
+            margin-top: 16px;
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 15px;
+            letter-spacing: 0.3px;
+            font-weight: 500;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 32px;
+            font-size: 11px;
+            color: rgba(255, 255, 255, 0.12);
+            letter-spacing: 0.3px;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 550px) {
+            .container {
+                padding: 24px 16px;
+            }
+            .tab-btn {
+                font-size: 12px;
+                padding: 6px 8px;
+                min-width: 60px;
+            }
+            .link-btn {
+                padding: 14px 16px;
+                font-size: 14px;
+            }
+            .processor-chip {
+                font-size: 11px;
+                padding: 4px 10px;
+            }
+            .processor-chip.highlight {
+                font-size: 16px;
+                padding: 10px 20px;
+            }
+            .processor-chip.highlight .emoji {
+                font-size: 20px;
+            }
+            .form-wrapper iframe {
+                height: 700px;
+            }
+            .bio-header .bio-avatar {
+                width: 60px;
+                height: 60px;
+                font-size: 28px;
+            }
+            .bio-header h2 {
+                font-size: 20px;
+            }
+            .header h1 {
+                font-size: 24px;
+            }
+            .avatar {
+                width: 72px;
+                height: 72px;
+                font-size: 40px;
+            }
+            .join-top-btn {
+                font-size: 18px;
+                padding: 15px;
+            }
+            .join-top-btn::before,
+            .join-top-btn::after {
+                font-size: 18px;
+            }
+            .pay-simple-btn::before,
+            .pay-simple-btn::after {
+                display: none;
+            }
+            .offer-tier h4 {
+                font-size: 18px;
+            }
+        }
+
+        @media (max-width: 420px) {
+            .tab-nav {
+                gap: 2px;
+            }
+            .tab-btn {
+                font-size: 11px;
+                padding: 6px 4px;
+                min-width: 50px;
+            }
+            .processor-chip.highlight {
+                font-size: 14px;
+                padding: 8px 14px;
+            }
+            .processor-chip.highlight .emoji {
+                font-size: 18px;
+            }
+            .form-wrapper iframe {
+                height: 600px;
+            }
+            .join-top-btn {
+                font-size: 16px;
+                padding: 12px;
+            }
+            .join-top-btn::before,
+            .join-top-btn::after {
+                display: none;
+            }
+            .offer-tier {
+                padding: 16px 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ===== SPARKLE CANVAS ===== -->
+    <canvas id="sparkleCanvas"></canvas>
+
+    <!-- ===== FLOATING HEARTS ===== -->
+
+    <div class="container">
+
+        <!-- ========================================================= -->
+        <!-- HEADER -->
+        <!-- ========================================================= -->
+        <div class="header">
+            <div class="avatar">🍕</div>
+            <h1>Patreon+</h1>
+            <p>✨ Portal · Bio · Offers · Forums ✨</p>
+            <span class="badge">✦ No middlemen · 100% direct ✦</span>
+        </div>
+
+        <!-- ========================================================= -->
+        <!-- TABS – now four -->
+        <!-- ========================================================= -->
+        <div class="tab-nav">
+            <button class="tab-btn active" data-tab="payments">💳 Portal</button>
+            <button class="tab-btn" data-tab="bio">🌐 Bio</button>
+            <button class="tab-btn" data-tab="offers">📦 Offers</button>
+            <button class="tab-btn" data-tab="forums">💬 Forums</button>
+        </div>
+
+        <!-- ========================================================= -->
+        <!-- TAB 1: PORTAL (unchanged) -->
+        <!-- ========================================================= -->
+        <div class="tab-content active" id="tab-payments">
+            <div class="portal-container">
+                <h3>Direct Checkout</h3>
+                <p class="sub">Pay me directly – no platform fees, 100% goes to me.</p>
+
+                <button class="join-top-btn" id="joinNowBtn">🚀 Join Now</button>
+
+                <div class="order-summary">
+                    <div class="row">
+                        <span class="label">📦 Plan</span>
+                        <span class="value">Pro ⭐ (Monthly)</span>
+                    </div>
+                    <div class="row">
+                        <span class="label">🔄 Billing</span>
+                        <span class="value">Recurring</span>
+                    </div>
+                    <div class="row total">
+                        <span class="label">Total</span>
+                        <span class="value">$5.99</span>
+                    </div>
+                </div>
+
+                <div class="processors-section">
+                    <span class="section-label">💳 Payment Processors</span>
+                    <div class="processor-grid">
+                        <a href="https://buy.stripe.com/28EeVd4O216l9HzaVJenS00" target="_blank" class="processor-chip highlight"><span class="emoji">⚡</span> Stripe</a>
+                        <a href="https://www.paypal.com/ncp/payment/232MAXP5VWDSC" target="_blank" class="processor-chip highlight"><span class="emoji">💸</span> PayPal</a>
+                        <a href="https://link.me/dancaplanet" target="_blank" class="processor-chip"><span class="emoji">📱</span> Venmo</a>
+                        <a href="https://link.me/dancaplanet" target="_blank" class="processor-chip"><span class="emoji">🏦</span> Zelle</a>
+                        <a href="https://link.me/dancaplanet" target="_blank" class="processor-chip"><span class="emoji">📲</span> Cash App</a>
+                        <a href="https://link.me/dancaplanet" target="_blank" class="processor-chip"><span class="emoji">💳</span> Helcim</a>
+                    </div>
+
+                    <span class="section-label">📱 Digital Wallets & Mobile</span>
+                    <div class="processor-grid">
+                        <a href="https://link.me/dancaplanet" target="_blank" class="processor-chip"><span class="emoji">📲</span> Google Pay</a>
+                        <a href="https://link.me/dancaplanet" target="_blank" class="processor-chip"><span class="emoji">📱</span> Apple Pay</a>
+                        <a href="https://link.me/dancaplanet" target="_blank" class="processor-chip"><span class="emoji">💰</span> Cash</a>
+                    </div>
+
+                    <span class="section-label">🛒 Subscription & Creator Platforms</span>
+                    <div class="processor-grid">
+                        <a href="https://www.fedpromptly.com" target="_blank" class="processor-chip"><span class="emoji">📰</span> Substack</a>
+                        <a href="https://www.patreon.com/c/Viraldancandofunk/membership" target="_blank" class="processor-chip highlight"><span class="emoji">❤️</span> Patreon</a>
+                        <a href="https://github.com/sponsors/PokeLegend" target="_blank" class="processor-chip"><span class="emoji">💻</span> GitHub Sponsors</a>
+                        <a href="https://ko-fi.com/fedjumpergaming" target="_blank" class="processor-chip"><span class="emoji">☕</span> Ko-fi</a>
+                        <a href="https://buymeacoffee.com/Potatochat" target="_blank" class="processor-chip"><span class="emoji">🍵</span> Buy Me a Coffee</a>
+                    </div>
+
+                    <span class="section-label">🛍️ E‑Commerce & Storefronts</span>
+                    <div class="processor-grid">
+                        <a href="https://whop.com/viraldancandotrends" target="_blank" class="processor-chip highlight"><span class="emoji">🛍️</span> Whop</a>
+                        <a href="https://theworldtrade.gumroad.com" target="_blank" class="processor-chip"><span class="emoji">🎨</span> Gumroad</a>
+                        <a href="https://link.me/dancaplanet" target="_blank" class="processor-chip"><span class="emoji">🔗</span> Linktree</a>
+                        <a href="https://tinyurl.com/mr4acvdn" target="_blank" class="processor-chip"><span class="emoji">🔄</span> Keet.io</a>
+                        <a href="https://link.me/dancaplanet" target="_blank" class="processor-chip"><span class="emoji">📊</span> Stoat</a>
+                    </div>
+
+                    <span class="section-label">💬 Social & Community</span>
+                    <div class="processor-grid">
+                        <a href="https://discord.gg/JBSE9wN2kA" target="_blank" class="processor-chip"><span class="emoji">💬</span> Discord</a>
+                        <a href="https://link.me/dancaplanet" target="_blank" class="processor-chip"><span class="emoji">🚀</span> Launch Pass</a>
+                        <a href="https://link.me/dancaplanet" target="_blank" class="processor-chip"><span class="emoji">💬</span> upgrade.chat</a>
+                        <a href="https://t.me/viraldancandotrends" target="_blank" class="processor-chip"><span class="emoji">⭐</span> Telegram Stars</a>
+                        <a href="https://link.me/dancaplanet" target="_blank" class="processor-chip"><span class="emoji">🎥</span> Streamlabs Tips</a>
+                    </div>
+
+                    <span class="section-label">₿ Crypto & Banking</span>
+                    <div class="processor-grid">
+                        <a href="https://link.me/dancaplanet" target="_blank" class="processor-chip"><span class="emoji">₿</span> All Crypto</a>
+                        <a href="https://link.me/dancaplanet" target="_blank" class="processor-chip"><span class="emoji">🏦</span> Direct Wire</a>
+                        <a href="https://link.me/dancaplanet" target="_blank" class="processor-chip"><span class="emoji">🛒</span> Klarna</a>
+                    </div>
+                </div>
+
+                <button class="pay-simple-btn" id="payNowBtn">Pay $5.99 now</button>
+                <div class="secure-badge">🔒 Secured by me · No third-party fees</div>
+
+                <div class="video-wrapper">
+                    <iframe 
+                        src="https://www.youtube.com/embed/Vx8V2si2RiA?autoplay=1&mute=1" 
+                        title="YouTube video player" 
+                        frameborder="0" 
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                        referrerpolicy="strict-origin-when-cross-origin" 
+                        allowfullscreen>
+                    </iframe>
+                </div>
+
+            </div>
+            <div class="footer">© 2026 Patreon+ · Direct payments · ⚡</div>
+        </div>
+
+        <!-- ========================================================= -->
+        <!-- TAB 2: BIO (unchanged) -->
+        <!-- ========================================================= -->
+        <div class="tab-content" id="tab-bio">
+            <div class="bio-header">
+                <div class="bio-avatar">🍕</div>
+                <h2>Patreon+</h2>
+                <p class="bio-tagline">✦ Your creative hub · No middlemen ✦</p>
+            </div>
+
+            <div class="link-list">
+                <div class="link-btn highlight" id="bioPortalBtn">
+                    <span class="left">
+                        <span class="icon">💳</span>
+                        <span class="label">Go to Portal</span>
+                    </span>
+                    <span class="right-arrow">→</span>
+                </div>
+
+                <div class="link-btn" id="bioOffersBtn">
+                    <span class="left">
+                        <span class="icon">📦</span>
+                        <span class="label">Browse Offers</span>
+                        <span class="tag pro">Explore</span>
+                    </span>
+                    <span class="right-arrow">→</span>
+                </div>
+
+                <div class="link-btn" id="bioForumsBtn">
+                    <span class="left">
+                        <span class="icon">💬</span>
+                        <span class="label">Visit Forums</span>
+                        <span class="tag pro">Discuss</span>
+                    </span>
+                    <span class="right-arrow">→</span>
+                </div>
+
+                <div class="link-btn" data-bio-label="Animated Links">
+                    <span class="left">
+                        <span class="icon">✨</span>
+                        <span class="label">Animated Links</span>
+                        <span class="tag pro">Service</span>
+                    </span>
+                    <span class="right-arrow">→</span>
+                </div>
+
+                <div class="link-btn" data-bio-label="Digital Shop">
+                    <span class="left">
+                        <span class="icon">🛍️</span>
+                        <span class="label">Digital Shop</span>
+                        <span class="tag">Buy</span>
+                    </span>
+                    <span class="right-arrow">→</span>
+                </div>
+
+                <div class="link-btn" data-bio-label="Exclusive Content">
+                    <span class="left">
+                        <span class="icon">🔒</span>
+                        <span class="label">Exclusive Content</span>
+                        <span class="tag pro">Unlock</span>
+                    </span>
+                    <span class="right-arrow">→</span>
+                </div>
+            </div>
+
+            <div class="bio-footer">© 2026 Patreon+ · My offers, my platform · 🌸</div>
+        </div>
+
+        <!-- ========================================================= -->
+        <!-- TAB 3: OFFERS – Strategic Framework List (NEW) -->
+        <!-- ========================================================= -->
+        <div class="tab-content" id="tab-offers">
+            <div class="offers-container">
+                <h3>📦 My Offerings</h3>
+                <p class="sub">A curated framework of exclusive content tiers.</p>
+
+                <!-- Tier 1 -->
+                <div class="offer-tier">
+                    <span class="tier-badge tier1">Tier 1 · Public</span>
+                    <h4>Street Style & Candid Culture</h4>
+                    <div class="tier-sub">Observational and trend-based content captured in public environments.</div>
+                    <div class="tier-desc">
+                        Your premier source for <strong>Street Style</strong> and <strong>Public Captures</strong> from around the globe. Celebrating the art of <strong>Candid Culture</strong> – we discover and showcase the hottest emerging trends.
+                    </div>
+                    <div class="tier-codes">
+                        <div class="code-label">Official Marketing Code</div>
+                        <div class="code-item"><strong>Primary Framing:</strong> "Street Style"</div>
+                        <div class="code-item"><strong>Secondary Framing:</strong> "Public Captures"</div>
+                        <div class="code-item"><strong>Tertiary Framing:</strong> "Candid Culture"</div>
+                    </div>
+                </div>
+
+                <!-- Tier 2 -->
+                <div class="offer-tier">
+                    <span class="tier-badge tier2">Tier 2 · Exclusive</span>
+                    <h4>Global Relaxation & Curated Social Experiences</h4>
+                    <div class="tier-sub">Lifestyle guides, wellness retreats, and professional companionship.</div>
+                    <div class="tier-desc">
+                        Unlock exclusive guides to <strong>Global Relaxation</strong> and <strong>Discreet Lifestyle Services</strong>. Explore unique wellness retreats, behind‑the‑scenes experiences, and resources for understanding <strong>Transactional Intimacy</strong> with professional providers.
+                    </div>
+                    <div class="tier-codes">
+                        <div class="code-label">Official Marketing Code</div>
+                        <div class="code-item"><strong>Primary Framing:</strong> "Global Relaxation Experiences"</div>
+                        <div class="code-item"><strong>Secondary Framing:</strong> "Discreet Lifestyle Services" / "Curated Social Experiences"</div>
+                        <div class="code-item"><strong>Content Focus:</strong> Wellness, travel, social dynamics, professional companionship.</div>
+                    </div>
+                </div>
+
+                <!-- Tier 3 -->
+                <div class="offer-tier">
+                    <span class="tier-badge tier3">Tier 3 · The Vault</span>
+                    <h4>The Archives</h4>
+                    <div class="tier-sub">Highest exclusivity – uncut, unfiltered, unseen.</div>
+                    <div class="tier-desc">
+                        <strong>The final key unlocks The Archives.</strong> This is our most exclusive vault, housing material that is too sensitive and too raw for other platforms. Access is extremely limited. See what they don't want you to see.
+                    </div>
+                    <div class="tier-codes">
+                        <div class="code-label">Internal Designation</div>
+                        <div class="code-item"><strong>Risk Category:</strong> HIGHEST RISK</div>
+                        <div class="code-item"><strong>Public Framing:</strong> "The Archives" or "The Vault"</div>
+                        <div class="code-item"><strong>Marketing:</strong> Abstract, focusing on exclusivity and sensitivity.</div>
+                    </div>
+                </div>
+
+                <div class="footer">© 2026 Patreon+ · Exclusive content framework · 🔐</div>
+            </div>
+        </div>
+
+        <!-- ========================================================= -->
+        <!-- TAB 4: FORUMS – was previously "Offers" (Google Form) -->
+        <!-- ========================================================= -->
+        <div class="tab-content" id="tab-forums">
+            <div class="section-title">
+                💬 Community Forums <span class="lock">Join the discussion</span>
+            </div>
+            <div class="form-wrapper">
+                <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSd8aWw977kjtAR9OUfdtJdYRLc9DPDC5e0Gt7lDCj5p-Ieysg/viewform?embedded=true" width="640" height="2640" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
+            </div>
+            <div class="join-list-text">📧 Join My List</div>
+            <div class="footer">© 2026 Patreon+ · Community forums · 💬</div>
+        </div>
+
+    </div>
+
+    <script>
+        // ============================================================
+        // SPARKLE CANVAS (unchanged)
+        // ============================================================
+        const canvas = document.getElementById('sparkleCanvas');
+        const ctx = canvas.getContext('2d');
+        let w, h;
+        let sparkles = [];
+
+        function resizeCanvas() {
+            w = canvas.width = window.innerWidth;
+            h = canvas.height = window.innerHeight;
+        }
+        resizeCanvas();
+        window.addEventListener('resize', resizeCanvas);
+
+        class Sparkle {
+            constructor() {
+                this.x = Math.random() * w;
+                this.y = Math.random() * h;
+                this.size = Math.random() * 4 + 2;
+                this.speedX = (Math.random() - 0.5) * 0.5;
+                this.speedY = (Math.random() - 0.5) * 0.5;
+                this.opacity = Math.random() * 0.5 + 0.2;
+                this.phase = Math.random() * Math.PI * 2;
+                const colors = ['#00e5ff', '#ff0066', '#ffcc00', '#ff1493', '#00e676'];
+                this.color = colors[Math.floor(Math.random() * colors.length)];
+                this.type = Math.random() > 0.6 ? 'heart' : 'star';
+            }
+
+            update(time) {
+                this.x += this.speedX + Math.sin(time * 0.0008 + this.phase) * 0.15;
+                this.y += this.speedY + Math.cos(time * 0.0008 + this.phase) * 0.15;
+                this.opacity = (0.3 + 0.3 * Math.sin(time * 0.002 + this.phase)) * 0.6 + 0.2;
+                if (this.x < 0) this.x = w;
+                if (this.x > w) this.x = 0;
+                if (this.y < 0) this.y = h;
+                if (this.y > h) this.y = 0;
+            }
+
+            draw() {
+                ctx.save();
+                ctx.globalAlpha = this.opacity;
+                ctx.translate(this.x, this.y);
+                if (this.type === 'heart') {
+                    ctx.fillStyle = this.color;
+                    ctx.shadowColor = this.color;
+                    ctx.shadowBlur = 15;
+                    const s = this.size * 1.5;
+                    ctx.beginPath();
+                    ctx.moveTo(0, s * 0.3);
+                    ctx.bezierCurveTo(-s * 0.8, -s * 0.4, -s * 1.2, s * 0.4, 0, s * 1.0);
+                    ctx.bezierCurveTo(s * 1.2, s * 0.4, s * 0.8, -s * 0.4, 0, s * 0.3);
+                    ctx.fill();
+                } else {
+                    ctx.fillStyle = this.color;
+                    ctx.shadowColor = this.color;
+                    ctx.shadowBlur = 12;
+                    const s = this.size;
+                    ctx.beginPath();
+                    for (let i = 0; i < 8; i++) {
+                        const angle = (i / 8) * Math.PI * 2;
+                        const r = i % 2 === 0 ? s : s * 0.4;
+                        if (i === 0) ctx.moveTo(r * Math.cos(angle), r * Math.sin(angle));
+                        else ctx.lineTo(r * Math.cos(angle), r * Math.sin(angle));
+                    }
+                    ctx.closePath();
+                    ctx.fill();
+                }
+                ctx.restore();
+            }
+        }
+
+        function createFloatingHeart() {
+            const heart = document.createElement('div');
+            heart.className = 'floating-heart';
+            const emojis = ['💖', '💕', '💗', '🩷', '✨', '💝', '🌸'];
+            heart.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+            heart.style.left = Math.random() * 100 + '%';
+            heart.style.fontSize = (16 + Math.random() * 22) + 'px';
+            heart.style.animationDuration = (15 + Math.random() * 20) + 's';
+            heart.style.animationDelay = Math.random() * 10 + 's';
+            heart.style.color = ['#ff0066', '#ffcc00', '#00e5ff', '#ff1493'][Math.floor(Math.random() * 4)];
+            document.body.appendChild(heart);
+            setTimeout(() => heart.remove(), 35000);
+        }
+
+        for (let i = 0; i < 8; i++) setTimeout(createFloatingHeart, i * 3000);
+        setInterval(createFloatingHeart, 4000);
+
+        function initSparkles(count = 120) {
+            sparkles = [];
+            for (let i = 0; i < count; i++) {
+                sparkles.push(new Sparkle());
+            }
+        }
+        initSparkles();
+
+        let startTime = Date.now();
+
+        function animateSparkles() {
+            const now = Date.now();
+            ctx.clearRect(0, 0, w, h);
+            sparkles.forEach(s => {
+                s.update(now);
+                s.draw();
+            });
+            for (let i = 0; i < sparkles.length; i++) {
+                for (let j = i + 1; j < sparkles.length; j++) {
+                    const dx = sparkles[i].x - sparkles[j].x;
+                    const dy = sparkles[i].y - sparkles[j].y;
+                    const dist = Math.sqrt(dx * dx + dy * dy);
+                    if (dist < 120) {
+                        const alpha = 0.05 * (1 - dist / 120);
+                        ctx.beginPath();
+                        ctx.moveTo(sparkles[i].x, sparkles[i].y);
+                        ctx.lineTo(sparkles[j].x, sparkles[j].y);
+                        ctx.strokeStyle = `rgba(255, 255, 255, ${alpha})`;
+                        ctx.lineWidth = 0.5;
+                        ctx.stroke();
+                    }
+                }
+            }
+            requestAnimationFrame(animateSparkles);
+        }
+        animateSparkles();
+
+        // ============================================================
+        // TAB SWITCHING (updated for 4 tabs)
+        // ============================================================
+        const tabButtons = document.querySelectorAll('.tab-btn');
+        const tabContents = document.querySelectorAll('.tab-content');
+
+        tabButtons.forEach(btn => {
+            btn.addEventListener('click', function() {
+                tabButtons.forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                tabContents.forEach(c => c.classList.remove('active'));
+                const target = this.dataset.tab;
+                document.getElementById(`tab-${target}`).classList.add('active');
+            });
+        });
+
+        // ============================================================
+        // BIO TAB – navigation links
+        // ============================================================
+        document.getElementById('bioPortalBtn')?.addEventListener('click', function() {
+            window.open('https://whop.com/viraldancandotrends', '_blank');
+        });
+
+        document.getElementById('bioOffersBtn')?.addEventListener('click', function() {
+            // Switch to Offers tab
+            const offersTab = document.querySelector('.tab-btn[data-tab="offers"]');
+            if (offersTab) offersTab.click();
+        });
+
+        document.getElementById('bioForumsBtn')?.addEventListener('click', function() {
+            const forumsTab = document.querySelector('.tab-btn[data-tab="forums"]');
+            if (forumsTab) forumsTab.click();
+        });
+
+        document.querySelectorAll('.link-btn:not(#bioPortalBtn):not(#bioOffersBtn):not(#bioForumsBtn)').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const label = this.dataset.bioLabel || this.querySelector('.label')?.textContent || 'Link';
+                let url = '#';
+                if (label.includes('Animated Links')) {
+                    url = 'https://www.fedpromptly.com';
+                } else if (label.includes('Digital Shop')) {
+                    url = 'https://link.me/dancaplanet/shop';
+                } else if (label.includes('Exclusive Content')) {
+                    url = 'https://www.patreon.com/c/Viraldancandofunk/membership';
+                } else {
+                    url = 'https://link.me/dancaplanet';
+                }
+                window.open(url, '_blank');
+            });
+        });
+
+        // ============================================================
+        // PORTAL – BUTTON ACTIONS
+        // ============================================================
+        document.getElementById('payNowBtn')?.addEventListener('click', function() {
+            window.open('https://buy.stripe.com/28EeVd4O216l9HzaVJenS00', '_blank');
+        });
+
+        document.getElementById('joinNowBtn')?.addEventListener('click', function() {
+            window.open('https://whop.com/viraldancandotrends', '_blank');
+        });
+    </script>
+
+</body>
+</html>
