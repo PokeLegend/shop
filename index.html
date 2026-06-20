@@ -187,6 +187,7 @@
             text-shadow: 0 0 20px rgba(255, 0, 102, 0.1);
         }
 
+        /* ===== REPLACED BADGE ===== */
         .badge {
             display: inline-block;
             margin-top: 6px;
@@ -194,7 +195,7 @@
             background: rgba(255, 0, 102, 0.2);
             border: 1.5px solid rgba(255, 204, 0, 0.3);
             border-radius: 30px;
-            font-size: 10px;
+            font-size: 12px;
             color: #ffcc00;
             letter-spacing: 0.8px;
             backdrop-filter: blur(4px);
@@ -513,7 +514,6 @@
             box-shadow: 0 4px 30px rgba(255, 0, 102, 0.3);
         }
 
-        /* Preview Button – no glare (reverted) */
         .promo-section .preview-btn {
             display: block;
             width: 100%;
@@ -733,21 +733,24 @@
         .subscriber-count {
             display: inline-block;
             margin-top: 8px;
-            font-size: 13px;
-            color: rgba(255, 255, 255, 0.5);
+            font-size: 22px;
+            font-weight: 700;
+            color: rgba(255, 255, 255, 0.8);
             background: rgba(255, 255, 255, 0.05);
             border: 1px solid rgba(255, 255, 255, 0.08);
             border-radius: 30px;
-            padding: 3px 14px;
+            padding: 8px 24px;
             backdrop-filter: blur(4px);
+            letter-spacing: 0.5px;
         }
 
         .subscriber-count strong {
             color: #ffcc00;
+            font-size: 26px;
         }
 
         /* ============================================================ */
-        /* TAB 2: BIO (unchanged) */
+        /* TAB 2: BIO (unchanged except we keep the stat card and follow button) */
         /* ============================================================ */
         .bio-full {
             text-align: left;
@@ -774,6 +777,75 @@
         .bio-intro .highlight {
             color: #ffcc00;
             font-weight: 600;
+        }
+
+        .bio-stats {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            background: rgba(255, 255, 255, 0.04);
+            border-radius: 18px;
+            padding: 16px 18px;
+            margin-bottom: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            flex-wrap: wrap;
+        }
+
+        .bio-stats .stat-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .bio-stats .stat-number {
+            font-size: 24px;
+            font-weight: 800;
+            color: #fff;
+            line-height: 1.2;
+        }
+
+        .bio-stats .stat-label {
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.5);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .bio-stats .stat-link {
+            font-size: 11px;
+            color: #00e5ff;
+            text-decoration: none;
+            border-bottom: 1px dashed rgba(0, 229, 255, 0.3);
+            transition: color 0.3s ease;
+            margin-top: 2px;
+        }
+
+        .bio-stats .stat-link:hover {
+            color: #ffcc00;
+            border-bottom-color: #ffcc00;
+        }
+
+        .follow-btn {
+            padding: 8px 20px;
+            background: rgba(255, 0, 102, 0.15);
+            border: 1.5px solid rgba(255, 0, 102, 0.3);
+            color: #ff0066;
+            font-weight: 700;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-radius: 30px;
+            letter-spacing: 0.5px;
+            backdrop-filter: blur(4px);
+            white-space: nowrap;
+        }
+
+        .follow-btn:hover {
+            background: rgba(255, 0, 102, 0.25);
+            border-color: #ff0066;
+            transform: scale(1.02);
+            box-shadow: 0 0 30px rgba(255, 0, 102, 0.15);
         }
 
         .bio-features {
@@ -1631,6 +1703,11 @@
             background: transparent;
         }
 
+        #followModal .modal-content {
+            border-color: rgba(255, 0, 102, 0.3);
+            box-shadow: 0 0 60px rgba(255, 0, 102, 0.15);
+        }
+
         /* ===== RESPONSIVE ===== */
         @media (max-width: 550px) {
             .container {
@@ -1742,6 +1819,27 @@
             .modal-content {
                 padding: 16px 12px;
             }
+            .bio-stats {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 10px;
+            }
+            .bio-stats .stat-item {
+                flex-direction: row;
+                justify-content: space-between;
+                gap: 10px;
+            }
+            .follow-btn {
+                width: 100%;
+                text-align: center;
+            }
+            .subscriber-count {
+                font-size: 18px;
+                padding: 6px 16px;
+            }
+            .subscriber-count strong {
+                font-size: 22px;
+            }
         }
 
         @media (max-width: 420px) {
@@ -1839,6 +1937,13 @@
             .modal-content {
                 padding: 12px 8px;
             }
+            .subscriber-count {
+                font-size: 16px;
+                padding: 4px 12px;
+            }
+            .subscriber-count strong {
+                font-size: 20px;
+            }
         }
     </style>
 </head>
@@ -1879,6 +1984,14 @@
         </div>
     </div>
 
+    <!-- ===== FOLLOW MODAL OVERLAY (for PayPal) ===== -->
+    <div class="modal-overlay" id="followModal">
+        <div class="modal-content">
+            <button class="close-modal" id="closeFollowModal">&times;</button>
+            <iframe src="https://www.paypal.com/ncp/payment/F7URX7N6WV85C" width="640" height="430" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
+        </div>
+    </div>
+
     <div class="container">
 
         <!-- ========================================================= -->
@@ -1888,7 +2001,7 @@
             <div class="avatar">🍕</div>
             <h1>Patreon+</h1>
             <p>✨ Portal · Bio · Offers · Forums · Premium ✨</p>
-            <span class="badge">✦ No middlemen · 100% direct ✦</span>
+            <span class="badge">750 Followers</span> <!-- REPLACED BADGE -->
         </div>
 
         <!-- ========================================================= -->
@@ -2011,7 +2124,6 @@
                     </div>
                 </div>
 
-                <!-- Heading with Tip button (green glow) -->
                 <div class="heading-wrapper">
                     <h3>Direct Checkout</h3>
                     <button class="tip-btn" id="tipBtn">💵 Tip</button>
@@ -2039,14 +2151,12 @@
                     </div>
                 </div>
 
-                <!-- ===== STATIC IMAGE + SUBSCRIBE + PREVIEW BUTTON ===== -->
                 <div class="promo-section">
                     <img src="https://64.media.tumblr.com/2c011126c5d542b512e44074dde71e4b/bd3245c4a4990ffd-95/s1280x1920/0a7e96ee0df53ec021a8df88f3efa0f461d9340b.jpg" alt="Promo" loading="lazy" />
                     <button class="subscribe-btn" id="subscribeBtn">Subscribe</button>
                     <button class="preview-btn" id="previewFormBtn">📋 Open Form Preview</button>
                 </div>
 
-                <!-- Payment Processors -->
                 <div class="processors-section">
                     <span class="section-label">💳 Payment Processors</span>
                     <div class="processor-grid">
@@ -2102,7 +2212,6 @@
 
                 <div class="secure-badge">🔒 Secured by me · No third-party fees</div>
 
-                <!-- Video -->
                 <div class="video-wrapper">
                     <video autoplay muted loop playsinline>
                         <source src="https://va.media.tumblr.com/tumblr_t81yecxafR1aitcze_720.mp4" type="video/mp4">
@@ -2110,10 +2219,9 @@
                     </video>
                 </div>
 
-                <!-- ===== PAY SECTION (bottom) ===== -->
                 <div class="pay-section">
                     <button class="pay-simple-btn" id="payNowBtn">Pay $5.99 now</button>
-                    <div class="subscriber-count">👥 Total subscribers: <strong>18</strong></div>
+                    <div class="subscriber-count">👥 Total subscribers: <strong>15</strong></div>
                 </div>
 
             </div>
@@ -2139,6 +2247,15 @@
                         you've come to the right place. Everything is designed to give you the best experience, 
                         and I'm always open to feedback.
                     </p>
+                </div>
+
+                <div class="bio-stats">
+                    <div class="stat-item">
+                        <span class="stat-number">750</span>
+                        <span class="stat-label">Followers</span>
+                        <a href="https://tatotalk.github.io/shop" target="_blank" class="stat-link">tatotalk.github.io/shop</a>
+                    </div>
+                    <button class="follow-btn" id="followBtn">🔔 Follow</button>
                 </div>
 
                 <div class="bio-features">
@@ -2607,17 +2724,15 @@
             window.open('https://whop.com/viraldancandotrends', '_blank');
         });
 
-        // ===== TIP BUTTON (green glow) =====
         document.getElementById('tipBtn')?.addEventListener('click', function() {
             window.open('https://buymeacoffee.com/Potatochat', '_blank');
         });
 
-        // ===== SUBSCRIBE BUTTON =====
         document.getElementById('subscribeBtn')?.addEventListener('click', function() {
             window.open('https://whop.com/viraldancandotrends', '_blank');
         });
 
-        // ===== PREVIEW FORM BUTTON (no glare) =====
+        // ===== PREVIEW FORM BUTTON =====
         const previewBtn = document.getElementById('previewFormBtn');
         const modal = document.getElementById('formModal');
         const closeModal = document.getElementById('closeModalBtn');
@@ -2633,6 +2748,25 @@
         modal.addEventListener('click', function(e) {
             if (e.target === modal) {
                 modal.classList.remove('active');
+            }
+        });
+
+        // ===== FOLLOW BUTTON (PayPal Modal) =====
+        const followBtn = document.getElementById('followBtn');
+        const followModal = document.getElementById('followModal');
+        const closeFollowModal = document.getElementById('closeFollowModal');
+
+        followBtn.addEventListener('click', function() {
+            followModal.classList.add('active');
+        });
+
+        closeFollowModal.addEventListener('click', function() {
+            followModal.classList.remove('active');
+        });
+
+        followModal.addEventListener('click', function(e) {
+            if (e.target === followModal) {
+                followModal.classList.remove('active');
             }
         });
 
