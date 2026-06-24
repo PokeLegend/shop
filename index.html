@@ -16,23 +16,42 @@
             font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
             min-height: 100vh;
             padding: 16px;
-            background: #0d0d1a;
+            background-image: url('https://www.chromethemer.com/download/hd-wallpapers/water-pokemon-3840x2160.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
             display: flex;
             justify-content: center;
             align-items: flex-start;
             overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Dark overlay for readability */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            z-index: 0;
         }
 
         /* ===== CONTAINER ===== */
         .container {
             max-width: 500px;
             width: 100%;
-            background: #15152a;
+            background: rgba(21, 21, 42, 0.85);
             border-radius: 20px;
             padding: 24px 16px;
-            border: 1px solid #2a2a4a;
+            border: 1px solid rgba(42, 42, 74, 0.6);
             margin-top: 16px;
             text-align: center;
+            position: relative;
+            z-index: 1;
+            backdrop-filter: blur(2px);
         }
 
         /* ===== HEADER ===== */
@@ -83,7 +102,7 @@
         .badge {
             display: inline-block;
             padding: 4px 14px;
-            background: #1a1a35;
+            background: rgba(26, 26, 53, 0.7);
             border: 1px solid #2a2a4a;
             border-radius: 30px;
             font-size: 12px;
@@ -94,7 +113,7 @@
         .contact-header-link {
             display: inline-block;
             padding: 4px 14px;
-            background: #1a1a35;
+            background: rgba(26, 26, 53, 0.7);
             border: 1px solid #3b7bff;
             border-radius: 30px;
             font-size: 12px;
@@ -104,7 +123,7 @@
         }
 
         .contact-header-link:hover {
-            background: #2a2a5a;
+            background: rgba(42, 42, 90, 0.8);
         }
 
         /* ===== TABS ===== */
@@ -117,7 +136,7 @@
         }
 
         .tab-btn {
-            background: #1a1a35;
+            background: rgba(26, 26, 53, 0.7);
             border: 1px solid #2a2a4a;
             color: rgba(255, 255, 255, 0.5);
             padding: 6px 12px;
@@ -132,12 +151,12 @@
         }
 
         .tab-btn:hover {
-            background: #2a2a4a;
+            background: rgba(42, 42, 74, 0.8);
             color: #fff;
         }
 
         .tab-btn.active {
-            background: #2a2a5a;
+            background: rgba(42, 42, 90, 0.8);
             border-color: #3b7bff;
             color: #3b7bff;
         }
@@ -175,7 +194,7 @@
         }
 
         .tip-btn {
-            background: #1a1a35;
+            background: rgba(26, 26, 53, 0.7);
             border: 1px solid #2a2a4a;
             color: #00ff88;
             padding: 3px 12px;
@@ -187,7 +206,7 @@
         }
 
         .tip-btn:hover {
-            background: #2a2a4a;
+            background: rgba(42, 42, 74, 0.8);
         }
 
         .portal-container .sub {
@@ -223,7 +242,7 @@
             max-width: 380px;
             margin: 0 auto 16px auto;
             padding: 12px 16px;
-            background: #1a1a35;
+            background: rgba(26, 26, 53, 0.7);
             border: 1px solid #2a2a4a;
             border-radius: 16px;
             color: #fff;
@@ -271,7 +290,7 @@
         }
 
         .order-summary {
-            background: #1a1a35;
+            background: rgba(26, 26, 53, 0.7);
             border-radius: 16px;
             padding: 14px;
             border: 1px solid #2a2a4a;
@@ -346,7 +365,7 @@
             display: block;
             width: 100%;
             padding: 10px;
-            background: #1a1a35;
+            background: rgba(26, 26, 53, 0.7);
             border: 1px solid #3b7bff;
             color: #3b7bff;
             font-weight: 600;
@@ -358,7 +377,7 @@
         }
 
         .promo-section .add-email-btn:hover {
-            background: #2a2a5a;
+            background: rgba(42, 42, 90, 0.8);
         }
 
         /* ===== PROCESSORS ===== */
@@ -393,7 +412,7 @@
         }
 
         .processor-chip {
-            background: #1a1a35;
+            background: rgba(26, 26, 53, 0.7);
             border: 1px solid #2a2a4a;
             border-radius: 30px;
             padding: 4px 12px;
@@ -409,7 +428,7 @@
         }
 
         .processor-chip:hover {
-            background: #2a2a4a;
+            background: rgba(42, 42, 74, 0.8);
             color: #fff;
         }
 
@@ -503,7 +522,7 @@
             font-size: 16px;
             font-weight: 600;
             color: rgba(255, 255, 255, 0.7);
-            background: #1a1a35;
+            background: rgba(26, 26, 53, 0.7);
             border: 1px solid #2a2a4a;
             border-radius: 30px;
             padding: 4px 16px;
@@ -654,7 +673,7 @@
         }
 
         .offer-tier {
-            background: #1a1a35;
+            background: rgba(26, 26, 53, 0.7);
             border-radius: 16px;
             padding: 14px;
             margin-bottom: 14px;
@@ -673,17 +692,17 @@
         }
 
         .offer-tier .tier-badge.tier1 {
-            background: #2a2a5a;
+            background: rgba(42, 42, 90, 0.8);
             color: #3b7bff;
             border: 1px solid #3b7bff;
         }
         .offer-tier .tier-badge.tier2 {
-            background: #3a3a1a;
+            background: rgba(58, 58, 26, 0.8);
             color: #ffcc00;
             border: 1px solid #ffcc00;
         }
         .offer-tier .tier-badge.tier3 {
-            background: #3a1a1a;
+            background: rgba(58, 26, 26, 0.8);
             color: #ff1a1a;
             border: 1px solid #ff1a1a;
         }
@@ -710,7 +729,7 @@
         }
 
         .offer-tier .tier-codes {
-            background: #111128;
+            background: rgba(17, 17, 40, 0.7);
             border-radius: 10px;
             padding: 8px 12px;
             border: 1px solid #2a2a4a;
@@ -799,7 +818,7 @@
             align-items: center;
             justify-content: space-between;
             gap: 12px;
-            background: #1a1a35;
+            background: rgba(26, 26, 53, 0.7);
             border-radius: 16px;
             padding: 14px 16px;
             margin-bottom: 16px;
@@ -841,7 +860,7 @@
 
         .follow-btn {
             padding: 6px 16px;
-            background: #2a2a4a;
+            background: rgba(42, 42, 74, 0.8);
             border: 1px solid #3a3a5a;
             color: #fff;
             font-weight: 600;
@@ -852,11 +871,11 @@
         }
 
         .follow-btn:hover {
-            background: #3a3a5a;
+            background: rgba(58, 58, 90, 0.8);
         }
 
         .bio-features {
-            background: #1a1a35;
+            background: rgba(26, 26, 53, 0.7);
             border-radius: 16px;
             padding: 14px;
             margin-bottom: 16px;
@@ -892,7 +911,7 @@
 
         .bio-features .feature-item .feat-tag {
             font-size: 9px;
-            background: #2a2a4a;
+            background: rgba(42, 42, 74, 0.8);
             color: #ffcc00;
             padding: 1px 8px;
             border-radius: 30px;
@@ -901,7 +920,7 @@
         }
 
         .bio-instructions {
-            background: #1a1a35;
+            background: rgba(26, 26, 53, 0.7);
             border-radius: 16px;
             padding: 14px;
             margin-bottom: 16px;
@@ -926,7 +945,7 @@
         }
 
         .bio-instructions .step .step-num {
-            background: #2a2a5a;
+            background: rgba(42, 42, 90, 0.8);
             color: #fff;
             font-weight: 700;
             font-size: 11px;
@@ -949,7 +968,7 @@
         }
 
         .bio-contact .contact-item {
-            background: #1a1a35;
+            background: rgba(26, 26, 53, 0.7);
             border: 1px solid #2a2a4a;
             border-radius: 30px;
             padding: 4px 12px;
@@ -964,7 +983,7 @@
         }
 
         .bio-contact .contact-item:hover {
-            background: #2a2a4a;
+            background: rgba(42, 42, 74, 0.8);
             color: #fff;
         }
 
@@ -980,7 +999,7 @@
             align-items: center;
             justify-content: space-between;
             padding: 10px 14px;
-            background: #1a1a35;
+            background: rgba(26, 26, 53, 0.7);
             border: 1px solid #2a2a4a;
             border-radius: 14px;
             color: #fff;
@@ -992,7 +1011,7 @@
         }
 
         .bio-quick-links .quick-link:hover {
-            background: #2a2a4a;
+            background: rgba(42, 42, 74, 0.8);
         }
 
         .bio-quick-links .quick-link .ql-left {
@@ -1063,7 +1082,7 @@
         .section-title .lock {
             font-size: 11px;
             color: #ffcc00;
-            background: #1a1a35;
+            background: rgba(26, 26, 53, 0.7);
             padding: 2px 10px;
             border-radius: 20px;
             border: 1px solid #2a2a4a;
@@ -1074,7 +1093,7 @@
             margin: 0 auto;
             border-radius: 16px;
             overflow: hidden;
-            background: #1a1a35;
+            background: rgba(26, 26, 53, 0.7);
             border: 1px solid #2a2a4a;
         }
 
@@ -1124,7 +1143,7 @@
         }
 
         .premium-pricing .price-card {
-            background: #1a1a35;
+            background: rgba(26, 26, 53, 0.7);
             border-radius: 14px;
             padding: 12px;
             border: 1px solid #2a2a4a;
@@ -1152,7 +1171,7 @@
 
         .premium-pricing .price-card.highlight {
             border-color: #ff1a1a;
-            background: #2a1a1a;
+            background: rgba(42, 26, 26, 0.8);
         }
 
         .unlock-btn {
@@ -1188,7 +1207,7 @@
         }
 
         .premium-category {
-            background: #1a1a35;
+            background: rgba(26, 26, 53, 0.7);
             border-radius: 14px;
             padding: 12px;
             border: 1px solid #2a2a4a;
@@ -1248,7 +1267,7 @@
         .premium-note {
             margin-top: 14px;
             padding: 12px;
-            background: #1a1a35;
+            background: rgba(26, 26, 53, 0.7);
             border: 1px solid #2a2a4a;
             border-radius: 14px;
             color: rgba(255, 255, 255, 0.6);
@@ -1682,7 +1701,7 @@
                 </div>
 
                 <div class="promo-section">
-                    <img src="https://64.media.tumblr.com/70fd948d6695e046e55cf3658159c39e/2af7180c09ac2e4b-92/s1280x1920/6c5fa2b4465b1e502cbcdd8781c0837b89f3869f.pnj" alt="PokeJumper Promo" loading="lazy" />
+                    <img src="https://64.media.tumblr.com/84e7dd00734ff224c4e924a3067502db/9d478369896d3e89-76/s1280x1920/3efb5b3bf8fdcae4c2b543b9b5d5e04fbef3c14e.pnj" alt="PokeJumper Promo" loading="lazy" />
                     <button class="subscribe-btn" id="subscribeBtn">Catch 'Em All</button>
                     <button class="add-email-btn" id="addEmailBtn">📧 Join League</button>
                 </div>
@@ -1770,9 +1789,8 @@
 
                 <div class="slideshow-container" id="slideshowContainer">
                     <div class="slide-track" id="slideTrack">
-                        <div class="slide"><img src="https://64.media.tumblr.com/b2e688cafd199cc0095ce826ae1311e2/96dadbb12967f31e-52/s500x750/a0a03286373dec2ae8fe070d3eb5ee2deca46536.jpg" alt="Slide 1" loading="lazy" /></div>
-                        <div class="slide"><img src="https://64.media.tumblr.com/d42d225e2204a4f4b7faf58a76970bec/b90619557a3ba810-64/s500x750/293199ec71b1a8e2930ee6abdcb13825d0225320.jpg" alt="Slide 2" loading="lazy" /></div>
-                        <div class="slide"><img src="https://64.media.tumblr.com/cf7c1e1b25666a1024ba0e4e1ca03cf8/c47918e1faf0577c-80/s500x750/88e1fb0a1e3b2e2a7e1ae2ad9a7feb648b08638c.pnj" alt="Slide 3" loading="lazy" /></div>
+                        <div class="slide"><img src="https://64.media.tumblr.com/7a084d3e560736a966410ee3d4d4ddf3/311c4fd27f1d6131-97/s500x750/dd9ddb512d9cf20976a5860ded5abce6029db1a5.gifv" alt="Slide 1" loading="lazy" /></div>
+                        <div class="slide"><img src="https://64.media.tumblr.com/897322bb82c9ed76fb619b0bf108aaae/311c4fd27f1d6131-d3/s500x750/e4fb668e91c8fc602aeed3d4c2dec577898637b6.gifv" alt="Slide 2" loading="lazy" /></div>
                     </div>
                     <button class="slide-btn prev" id="slidePrev">‹</button>
                     <button class="slide-btn next" id="slideNext">›</button>
